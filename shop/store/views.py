@@ -134,8 +134,6 @@ def checkout(request):
         return redirect('cart')
 
 
-
-    # POST isteği işleniyor
     if request.method == "POST":
         if user.is_authenticated:
             customer = user.customer
@@ -186,7 +184,6 @@ def updateItem(request):
     productId = data['productId']
     action = data['action']
 
-    # Kullanıcı kimlik doğrulamış mı diye kontrol edin
     if request.user.is_authenticated:
         customer = request.user
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
@@ -207,21 +204,20 @@ def updateItem(request):
         return JsonResponse('Item was added', safe=False)
 
     else:
-        # Kullanıcı kimlik doğrulamadıysa, bu kısmı çerezlerle işleyin
         product = get_object_or_404(Product, id=productId)
         cart = cookieCart(request)
 
         if action == 'add':
             if productId in cart:
-                if product.quantity > 0:  # Ürün miktarı sıfır değilse
+                if product.quantity > 0:
                     cart[productId]['quantity'] += 1
                 else:
-                    messages.error(request, 'This product is out of stock.')  # Ürün miktarı sıfırsa
+                    messages.error(request, 'This product is out of stock.')
             else:
-                if product.quantity > 0:  # Ürün miktarı sıfır değilse
+                if product.quantity > 0:
                     cart[productId] = {'quantity': 1}
                 else:
-                    messages.error(request, 'This product is out of stock.')  # Ürün miktarı sıfırsa
+                    messages.error(request, 'This product is out of stock.')
         elif action == 'remove':
             if productId in cart:
                 cart[productId]['quantity'] -= 1
@@ -229,7 +225,7 @@ def updateItem(request):
                 if cart[productId]['quantity'] <= 0:
                     del cart[productId]
 
-        # Güncellenmiş sepeti çereze geri kaydedin
+
         response = JsonResponse('Item was added', safe=False)
         response.set_cookie('cart', json.dumps(cart), samesite=None)
         return response

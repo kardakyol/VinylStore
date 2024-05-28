@@ -63,7 +63,7 @@ def guestOrder(request, data):
 
     customer, created = Customer.objects.get_or_create(
         email=email,
-        defaults={'name': name}  # default değeri olarak ismi ayarla
+        defaults={'name': name}
     )
 
     order = Order.objects.create(
