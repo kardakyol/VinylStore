@@ -49,9 +49,9 @@ def login_view(request):
                 return redirect('store')
 
             else:
-                messages.error(request, 'Kullanıcı adı veya şifre hatalı.')
+                messages.error(request, 'Wrong username or password.')
         else:
-            messages.error(request, 'Kullanıcı adı veya şifre hatalı.')
+            messages.error(request, 'Wrong username or password.')
     else:
         form = AuthenticationForm()
 
