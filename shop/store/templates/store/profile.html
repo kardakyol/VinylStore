@@ -1,0 +1,15 @@
+{% extends "store/main.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            <h2 class="mb-0">My Profile</h2>
+        </div>
+        <div class="card-body">
+            <p class="mb-2"><strong>Ad:</strong> {{ user.first_name }} {{ user.last_name }}</p>
+            <p class="mb-2"><strong>Email:</strong> {{ user.email }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

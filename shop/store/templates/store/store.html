@@ -1,0 +1,25 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+	<div class="row">
+		{% for product in products %}
+		<div class="col-lg-4">
+			<div class="box-element product" style="height: 450px;">
+				<img class="thumbnail" src="{{product.imageURL}}" style="width: 100%; height: 300px; object-fit: cover; text-align: center;">
+				<h6><strong>{{product.name}}</strong></h6>
+				{% if product.author %}
+				<p>By {{product.author}} - {{product.categories}} </p>
+				{% endif %}
+				<hr>
+
+				<button data-product="{{product.id}}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
+
+				<a class="btn btn-outline-success" href="#">View</a>
+				<h4 style="display: inline-block; float: right"><strong>${{product.price}}</strong></h4>
+
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+
+{% endblock content %}

@@ -1,0 +1,11 @@
+{% extends 'store/main.html' %}
+{% block content %}
+    <div class="container">
+        <div class="alert alert-success" role="alert">
+            <h4 class="alert-heading">Success!</h4>
+            <p>Your order has been placed successfully!</p>
+            <hr>
+            <p class="mb-0">Thank you for shopping with us. <a href="{% url 'store' %}">Continue shopping</a></p>
+        </div>
+    </div>
+{% endblock %}
